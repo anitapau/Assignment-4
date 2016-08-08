@@ -18,11 +18,11 @@ int main(int argc, char *argv[]){
 				i++;
 			}
 			else if(strcmp(argv[i],"-i") == 0){
-				inputfile=argv[i+1];
+				inputfile2=argv[i+1];
 				i+=2;
 			}	
 		else if(strcmp(argv[i],"-o")==0){
-				outputfile=argv[i+1];
+				outputfile2=argv[i+1];
 			 i+=2;
 			}
 		else if(strcmp(argv[i], "-b") == 0) {
@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
   if(degrees)pixMap_rotate(p,degrees);
   if(grayFlag)pixMap_gray(p);
   if(sum) pixMap_sort(p);
-  if(bmpFile) pixMap_write_bmp16(p, outputfile);
-  pixMap_write(p,outputfile);
+  if(bmpFile) pixMap_write_bmp16(p, outputfile2);
+  pixMap_write(p,outputfile2);
   pixMap_destroy(p);
   return 0;
 }
