@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
+#include "bitPrint.h"
 
 #ifndef M_PI
  #define M_PI 3.14159265
@@ -40,3 +41,4 @@ void pixMap_gray(pixMap *p); //gray out the colors of the pixMap
 //ASSIGNMENT 4 FUNCTIONS
 void pixMap_write_bmp16(pixMap *p,char *filename); //write 16 bit bmp to output file
 void pixMap_sort(pixMap *p); //sort colors of the pixMap by total of r,g,b values
+int pixMap_cmp(const void *x, const void *y);

@@ -1,6 +1,7 @@
 #include "pixutils.h"
 #include "lodepng.h"
 #include "bmp.h"
+#include "bitPrint.h"
 
 //private methods
 static pixMap *pixMap_init(); //allocate memory for pixMap and set variables to zero
@@ -8,8 +9,10 @@ static void pixMap_reset();  //free the allocated memoray and set to zero but do
 static void pixMap_copy(pixMap *dest,pixMap *source);
 static int pixMap_read(pixMap *p,char *filename);
 void pixMap_sort(pixMap *p);
-static int pixMap_cmp(const void *x, const void *y);
+int pixMap_cmp(const void *x, const void *y);
 void pixMap_write_bmp16(pixMap *p, char *fileName);
+//void printBitsEndian(void *ptr, char nBytes, char endian);
+
 
 
 static pixMap* pixMap_init(){
@@ -168,10 +171,13 @@ void pixMap_write_bmp16(pixMap *p, char *fileName) {
  int column;
 	for(int i = 0; i< p->height; i++) {
 		for(int j = 0; j< p->width; j++) {
-			row = p->height -j -1;
-			column = p->width - x -1;
-			uint16_t r5 = p->pixArray[j][i].r;
-			fprintf(stderr, "%d",rd);
+			row = p->height -i -1;
+			column = p->width - j -1;
+		uint16_t r5 = p->pixArray[i][j].r >> 3 ;
+		uint16_t g6 = p->pixArray[i][j].g >> 2;
+		uint16_t b5 = p->pixArray[i][j].b >>3; 
+		uint16_t total = (r5 << 11) | (g6 << 5) | (b5);
+		bmp->pixArray[row][column] = total;
 		}
 	}
 	BMP16_write(bmp, fileName);
@@ -183,7 +189,7 @@ void pixMap_write_bmp16(pixMap *p, char *fileName) {
 void pixMap_sort(pixMap *p){
 	qsort(p->image, p->height * p->width, sizeof(rgba), pixMap_cmp);
 }
-static int pixMap_cmp(const void *x, const void *y){
+int pixMap_cmp(const void *x, const void *y){
 	const rgba *ra = (rgba*) x;
 	const rgba *rb = (rgba*) y; 
 	return  (ra->r + ra->g + ra->b) - (rb->r + rb->g + rb->b);
