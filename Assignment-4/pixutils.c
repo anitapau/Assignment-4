@@ -8,9 +8,9 @@ static pixMap *pixMap_init(); //allocate memory for pixMap and set variables to 
 static void pixMap_reset();  //free the allocated memoray and set to zero but do not free memory for pixMap
 static void pixMap_copy(pixMap *dest,pixMap *source);
 static int pixMap_read(pixMap *p,char *filename);
-void pixMap_sort(pixMap *p);
-int pixMap_cmp(const void *x, const void *y);
-void pixMap_write_bmp16(pixMap *p, char *fileName);
+//void pixMap_sort(pixMap *p);
+static int pixMap_cmp(const void *x, const void *y);
+//void pixMap_write_bmp16(pixMap *p, char *fileName);
 //void printBitsEndian(void *ptr, char nBytes, char endian);
 
 
@@ -189,7 +189,7 @@ void pixMap_write_bmp16(pixMap *p, char *fileName) {
 void pixMap_sort(pixMap *p){
 	qsort(p->image, p->height * p->width, sizeof(rgba), pixMap_cmp);
 }
-int pixMap_cmp(const void *x, const void *y){
+static int pixMap_cmp(const void *x, const void *y){
 	const rgba *ra = (rgba*) x;
 	const rgba *rb = (rgba*) y; 
 	return  (ra->r + ra->g + ra->b) - (rb->r + rb->g + rb->b);
