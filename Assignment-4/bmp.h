@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include "pixutils.h"
 /* Bitmap header 14 bytes*/
 /*
 	uint16_t		Magic;				     0  Magic identifier: "BM"   

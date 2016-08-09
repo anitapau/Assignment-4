@@ -3,9 +3,9 @@
 
 int main(int argc, char *argv[]){
   char *inputfile=0,*outputfile=0;
-  char *inputfile2 = 0, *outputfile2 = 0;
+  char *outputfile2 = 0;
   float degrees=0;
-  char grayFlag=0, sum = 0, bmpFile = 0;
+  char grayFlag=0, sum = 0;
   int i=1;
   while (i<argc){
 			//check for flags -i -o -f -d 
@@ -18,16 +18,16 @@ int main(int argc, char *argv[]){
 				i++;
 			}
 			else if(strcmp(argv[i],"-i") == 0){
-				inputfile2=argv[i+1];
+				inputfile=argv[i+1];
 				i+=2;
 			}	
 		else if(strcmp(argv[i],"-o")==0){
-				outputfile2=argv[i+1];
-			 i+=2;
+				outputfile = argv[i+1];
+				i+=2;
 			}
 		else if(strcmp(argv[i], "-b") == 0) {
-			bmpFile = 1;
-			i++;
+			outputfile2 = argv[i+1];
+			i+=2;
 		}
 		else if(strcmp(argv[i], "-s") == 0) {
 			sum = 1;
@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
   if(degrees)pixMap_rotate(p,degrees);
   if(grayFlag)pixMap_gray(p);
   if(sum) pixMap_sort(p);
-  if(bmpFile) pixMap_write_bmp16(p, outputfile2);
-  pixMap_write(p,outputfile2);
+ // if(outputfile2) pixMap_write_bmp16(p, outputfile2);
+  pixMap_write(p,outputfile);
   pixMap_destroy(p);
   return 0;
 }

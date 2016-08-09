@@ -29,13 +29,6 @@ void BMP16_map_destroy( BMP16_map *bmp16){
 	}
 	if(bmp16)free(bmp16);	
 }	
-//sort method for PixMap
-void pixMap_sort(pixMap *p){
-	qsort(p->image, p->height* sizeof(rgba*), sizeof(rgba)*p->height *p->width, pixMap_cmp);
-}
-int pixMap_cmp(const void *x, const void *y){
-	return *((rgba*) x) - *(rgba* y);
-}
 
 	
 void BMP16_write(BMP16_map *bmp16,char *filename){
@@ -94,4 +87,3 @@ void BMP16_write(BMP16_map *bmp16,char *filename){
 	fclose(fp);
 	free(header);
 }
-

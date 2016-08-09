@@ -6,6 +6,8 @@ static pixMap *pixMap_init(); //allocate memory for pixMap and set variables to 
 static void pixMap_reset();  //free the allocated memoray and set to zero but do not free memory for pixMap
 static void pixMap_copy(pixMap *dest,pixMap *source);
 static int pixMap_read(pixMap *p,char *filename);
+void pixMap_sort(pixMap *p);
+static int pixMap_cmp(const void *x, const void *y);
 
 static pixMap* pixMap_init(){
 	pixMap *p;
@@ -156,6 +158,16 @@ void pixMap_gray (pixMap *p){
 	}
 	return;
 }
+//sort method for PixMap
+void pixMap_sort(pixMap *p){
+	qsort(p->image, p->height * p->width, sizeof(rgba), pixMap_cmp);
+}
+static int pixMap_cmp(const void *x, const void *y){
+	const rgba *ra = (rgba*) x;
+	const rgba *rb = (rgba*) y; 
+	return  (ra->r + ra->g + ra->b) - (rb->r + rb->g + rb->b);
+}
+
 int pixMap_write(pixMap *p,char *filename){
 	int error=0;
  if(lodepng_encode32_file(filename, p->image, p->width, p->height)){

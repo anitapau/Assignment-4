@@ -40,4 +40,3 @@ void pixMap_gray(pixMap *p); //gray out the colors of the pixMap
 //ASSIGNMENT 4 FUNCTIONS
 void pixMap_write_bmp16(pixMap *p,char *filename); //write 16 bit bmp to output file
 void pixMap_sort(pixMap *p); //sort colors of the pixMap by total of r,g,b values
-
