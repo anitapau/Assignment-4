@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
   if(degrees)pixMap_rotate(p,degrees);
   if(grayFlag)pixMap_gray(p);
   if(sum) pixMap_sort(p);
- // if(outputfile2) pixMap_write_bmp16(p, outputfile2);
+  if(outputfile2) pixMap_write_bmp16(p, outputfile2);
   pixMap_write(p,outputfile);
   pixMap_destroy(p);
   return 0;
